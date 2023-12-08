@@ -111,10 +111,10 @@ char *convert_number(long int num, int base, int flags)
 	ptr = &buffer[49];
 	*ptr = '\0';
 
-	do	{
+	for (; n != 0; n /= base)
+	{
 		*--ptr = array[n % base];
-		n /= base;
-	} while (n != 0);
+	}
 
 	if (sign)
 		*--ptr = sign;
@@ -131,10 +131,13 @@ void remove_comments(char *buf)
 {
 	int i;
 
-	for (i = 0; buf[i] != '\0'; i++)
+	i = 0;
+	while (buf[i] != '\0')
+	{
 		if (buf[i] == '#' && (!i || buf[i - 1] == ' '))
-		{
-			buf[i] = '\0';
+			{ buf[i] = '\0';
 			break;
-		}
+			}
+		i++;
+	}
 }
