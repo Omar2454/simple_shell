@@ -8,15 +8,14 @@
  */
 size_t list_len(const list_t *h)
 {
-	size_t i = 0;
+    size_t i = 0;
 
-	while (h)
-	{
-		h = h->next;
-		i++;
-	}
-	return (i);
+    for (; h; h = h->next, i++)
+        ; // The loop body is empty as the work is done in the increment part
+
+    return i;
 }
+
 
 /**
  * list_to_strings - returns an array of strings of the list->str
@@ -26,33 +25,38 @@ size_t list_len(const list_t *h)
  */
 char **list_to_strings(list_t *head)
 {
-	list_t *node = head;
-	size_t i = list_len(head), j;
-	char **strs;
-	char *str;
+    size_t i = 0, j;
+    char **strs;
+    char *str;
+    list_t *node = head;
 
-	if (!head || !i)
-		return (NULL);
-	strs = malloc(sizeof(char *) * (i + 1));
-	if (!strs)
-		return (NULL);
-	for (i = 0; node; node = node->next, i++)
-	{
-		str = malloc(_strlen(node->str) + 1);
-		if (!str)
-		{
-			for (j = 0; j < i; j++)
-				free(strs[j]);
-			free(strs);
-			return (NULL);
-		}
+    if (!head || !(i = list_len(head)))
+        return (NULL);
+    strs = malloc(sizeof(char *) * (i + 1));
+    if (!strs)
+        return (NULL);
 
-		str = _strcpy(str, node->str);
-		strs[i] = str;
-	}
-	strs[i] = NULL;
-	return (strs);
+    i = 0;
+    while (node)
+    {
+        str = malloc(_strlen(node->str) + 1);
+        if (!str)
+        {
+            for (j = 0; j < i; j++)
+                free(strs[j]);
+            free(strs);
+            return (NULL);
+        }
+
+        str = _strcpy(str, node->str);
+        strs[i] = str;
+        i++;
+        node = node->next;
+    }
+    strs[i] = NULL;
+    return (strs);
 }
+
 
 
 /**
@@ -63,20 +67,20 @@ char **list_to_strings(list_t *head)
  */
 size_t print_list(const list_t *h)
 {
-	size_t i = 0;
+    size_t i = 0;
 
-	while (h)
-	{
-		_puts(convert_number(h->num, 10, 0));
-		_putchar(':');
-		_putchar(' ');
-		_puts(h->str ? h->str : "(nil)");
-		_puts("\n");
-		h = h->next;
-		i++;
-	}
-	return (i);
+    for (; h; h = h->next, i++)
+    {
+        _puts(convert_number(h->num, 10, 0));
+        _putchar(':');
+        _putchar(' ');
+        _puts(h->str ? h->str : "(nil)");
+        _puts("\n");
+    }
+
+    return i;
 }
+
 
 /**
  * node_starts_with - returns node whose string starts with prefix
