@@ -12,11 +12,8 @@ void _eputs(char *str)
 
 	if (!str)
 		return;
-	while (str[i] != '\0')
-	{
+	for (; str[i] != '\0'; i++)
 		_eputchar(str[i]);
-		i++;
-	}
 }
 
 /**
