@@ -84,12 +84,10 @@ size_t print_list_str(const list_t *h)
 {
 	size_t i = 0;
 
-	while (h)
+	for (; h; h = h->next, i++)
 	{
 		_puts(h->str ? h->str : "(nil)");
 		_puts("\n");
-		h = h->next;
-		i++;
 	}
 	return (i);
 }
@@ -117,8 +115,7 @@ int delete_node_at_index(list_t **head, unsigned int index)
 		free(node);
 		return (1);
 	}
-	node = *head;
-	while (node)
+	for (node = *head; node; prev_node = node, node->next, i++)
 	{
 		if (i == index)
 		{
@@ -127,9 +124,6 @@ int delete_node_at_index(list_t **head, unsigned int index)
 			free(node);
 			return (1);
 		}
-		i++;
-		prev_node = node;
-		node = node->next;
 	}
 	return (0);
 }
@@ -147,13 +141,13 @@ void free_list(list_t **head_ptr)
 	if (!head_ptr || !*head_ptr)
 		return;
 	head = *head_ptr;
-	node = head;
-	while (node)
+
+	for (node = head; node; node = next_node)
 	{
 		next_node = node->next;
 		free(node->str);
 		free(node);
-		node = next_node;
 	}
+
 	*head_ptr = NULL;
 }
