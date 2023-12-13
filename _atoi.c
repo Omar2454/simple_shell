@@ -19,10 +19,10 @@ int interactive(info_t *info)
  */
 int is_delim(char c, char *delim)
 {
-    for (; *delim; delim++)
-        if (*delim == c)
-            return (1);
-    return (0);
+	for (; *delim; delim++)
+		if (*delim == c)
+			return (1);
+	return (0);
 }
 
 /**
@@ -47,28 +47,26 @@ int _isalpha(int c)
 
 int _atoi(char *s)
 {
-    int i = 0;
-    int sign = 1, flag = 0;
-    unsigned int result = 0;
+	int i = 0;
+	int sign = 1, flag = 0;
+	unsigned int result = 0;
 
-    while (s[i] != '\0' && flag != 2)
-    {
-        if (s[i] == '-')
-            sign *= -1;
+	while (s[i] != '\0' && flag != 2)
+	{
+		if (s[i] == '-')
+			sign *= -1;
 
-        if (s[i] >= '0' && s[i] <= '9')
-        {
-            flag = 1;
-            result *= 10;
-            result += (s[i] - '0');
-        }
-        else if (flag == 1)
-            flag = 2;
+		if (s[i] >= '0' && s[i] <= '9')
+		{
+			flag = 1;
+			result *= 10;
+			result += (s[i] - '0');
+		}
+		else if (flag == 1)
+			flag = 2;
+		i++;
+	}
 
-        i++;
-    }
-
-    // Calculate the output considering the sign
-    return sign == -1 ? -((int) result) : (int) result;
+	return (sign == -1 ? -((int) result) : (int) result);
 }
 

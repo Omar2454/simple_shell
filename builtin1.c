@@ -65,25 +65,24 @@ int set_alias(info_t *info, char *str)
  */
 int print_alias(list_t *node)
 {
-    char *p = NULL, *a = NULL;
+	char *p = NULL, *a = NULL;
 
-    if (node)
-    {
-        p = _strchr(node->str, '=');
-        a = node->str;
-        while (a <= p)
-        {
-            _putchar(*a);
-            a++;
-        }
-        _putchar('\'');
-        _puts(p + 1);
-        _puts("'\n");
-        return (0);
-    }
-    return (1);
+	if (node)
+	{
+		p = _strchr(node->str, '=');
+		a = node->str;
+		while (a <= p)
+		{
+			_putchar(*a);
+			a++;
+		}
+		_putchar('\'');
+		_puts(p + 1);
+		_puts("'\n");
+		return (0);
+	}
+	return (1);
 }
-
 /**
  * _myalias - mimics the alias builtin (man alias)
  * @info: Structure containing potential arguments. Used to maintain
