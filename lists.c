@@ -101,38 +101,36 @@ size_t print_list_str(const list_t *h)
  */
 int delete_node_at_index(list_t **head, unsigned int index)
 {
-    list_t *node, *prev_node = NULL;
-    unsigned int i = 0;
+	list_t *node, *prev_node = NULL;
+	unsigned int i = 0;
 
-    if (!head || !*head)
-        return (0);
+	if (!head || !*head)
+		return (0);
 
-    if (!index)
-    {
-        node = *head;
-        *head = (*head)->next;
-        free(node->str);
-        free(node);
-        return (1);
-    }
-    node = *head;
-    for (i = 0; node; i++)
-    {
-        if (i == index)
-        {
-            if (prev_node)
-                prev_node->next = node->next;
-            free(node->str);
-            free(node);
-            return (1);
-        }
-        prev_node = node;
-        node = node->next;
-    }
-    return (0);
+	if (!index)
+	{
+		node = *head;
+		*head = (*head)->next;
+		free(node->str);
+		free(node);
+		return (1);
+	}
+	node = *head;
+	for (i = 0; node; i++)
+	{
+		if (i == index)
+		{
+			if (prev_node)
+				prev_node->next = node->next;
+			free(node->str);
+			free(node);
+			return (1);
+		}
+		prev_node = node;
+		node = node->next;
+	}
+	return (0);
 }
-
-
 /**
  * free_list - frees all nodes of a list
  * @head_ptr: address of pointer to head node
