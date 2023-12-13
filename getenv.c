@@ -26,24 +26,21 @@ char **get_environ(info_t *info)
  */
 int _unsetenv(info_t *info, char *var)
 {
-	size_t i = 0; // Index
-	list_t *node; // Pointer to current node
+	size_t i = 0;
+	list_t *node;
 	char *p;
 
 	if (!info->env || !var)
 		return (0);
 
-	// Initialize node with the start of the environment linked list
 	node = info->env;
-	// Loop through the list
 	for (; node; node = node->next, i++)
 	{
 		p = starts_with(node->str, var);
 		if (p && *p == '=')
 		{
 			info->env_changed = delete_node_at_index(&(info->env), i);
-			// Reset the loop to start from the beginning as the list has changed
-			i = -1; // It will be incremented to 0 at the loop increment step
+			i = -1;
 			node = info->env;
 		}
 	}
