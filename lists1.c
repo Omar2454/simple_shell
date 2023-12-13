@@ -30,7 +30,9 @@ char **list_to_strings(list_t *head)
 	char *str;
 	list_t *node = head;
 
-	if (!head || !(i = list_len(head)))
+	i = list_len(head);
+
+	if (!head || !i)
 		return (NULL);
 
 	strs = malloc(sizeof(char *) * (i + 1));
