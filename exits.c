@@ -9,19 +9,20 @@
 */
 char *_strncpy(char *dest, char *src, int n)
 {
-char *s = dest;
-int i = 0;
-for (i = 0; src[i] != '\0' && i < n - 1; i++)
-{
-    dest[i] = src[i];
-}
-    int j = i;
-    for (j = i; j < n; j++)
-    {
-        dest[j] = '\0';
-    }
+	char *s = dest;
+	int i = 0;
 
-    return (s);
+	for (i = 0; src[i] != '\0' && i < n - 1; i++)
+	{
+		dest[i] = src[i];
+	}
+	int j = i;
+
+	for (j = i; j < n; j++)
+	{
+		dest[j] = '\0';
+	}
+	return (s);
 }
 
 /**
@@ -33,21 +34,21 @@ for (i = 0; src[i] != '\0' && i < n - 1; i++)
 */
 char *_strncat(char *dest, char *src, int n)
 {
-    int i, j;
-    char *s = dest;
+	int i, j;
+	char *s = dest;
 
-    for (i = 0; dest[i] != '\0'; i++)
-        ; /* Increment i until the end of dest */
+	for (i = 0; dest[i] != '\0'; i++)
+		;
 
-    for (j = 0; src[j] != '\0' && j < n; j++, i++)
-    {
-        dest[i] = src[j];
-    }
+	for (j = 0; src[j] != '\0' && j < n; j++, i++)
+	{
+		dest[i] = src[j];
+	}
 
-    if (j < n)
-        dest[i] = '\0';
+	if (j < n)
+		dest[i] = '\0';
 
-    return (s);
+	return (s);
 }
 
 /**
@@ -58,11 +59,10 @@ char *_strncat(char *dest, char *src, int n)
 */
 char *_strchr(char *s, char c)
 {
-    for (; *s != '\0'; s++)
-    {
-        if (*s == c)
-            return (s);
-    }
-
-    return (*s == c) ? s : NULL;
+	for (; *s != '\0'; s++)
+	{
+		if (*s == c)
+			return (s);
+	}
+	return ((*s == c) ? s : NULL);
 }
