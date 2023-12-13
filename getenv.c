@@ -26,11 +26,12 @@ char **get_environ(info_t *info)
  */
 int _unsetenv(info_t *info, char *var)
 {
-	if (!info->env || !var)
-		return (0);
 	char *p;
 
-	for (size_t i = 0, node = info->env; node; node = node->next, i++)
+	if (!info->env || !var)
+		return (0);
+
+	for (size_t i = 0, node = (size_t)info->env; node; node = node->next, i++)
 	{
 		p = starts_with(node->str, var);
 		if (p && *p == '=')
